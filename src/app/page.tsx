@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from 'react';
-import { ExternalLink, Github, Code, Users, Sparkles, ArrowRight, CheckCircle, Clock, MessageCircle, Mail } from 'lucide-react';
+import { ExternalLink, Github, Users, Sparkles, ArrowRight, CheckCircle, Clock, MessageCircle, Mail } from 'lucide-react';
+import Image from 'next/image';
 
 // Types
 interface Tag {
@@ -146,13 +147,14 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
         </div>
       </div>
 
-      {/* Image */}
       <div className="relative h-52 bg-gradient-to-br from-violet-900/20 to-purple-900/20 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-t from-background/95 via-transparent to-transparent z-10" />
-        <img 
+        <Image 
           src={project.image} 
           alt={project.title}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 filter group-hover:brightness-110"
+          width={1200}
+          height={630}
         />
         
         {/* Animated overlay */}
@@ -248,7 +250,6 @@ const ParticleBackground = () => {
 
 export default function ClientPortfolio() {
   const [currentProject, setCurrentProject] = useState(0);
-  const [isLoaded, setIsLoaded] = useState(false);
   
   const handleWhatsAppContact = () => {
     const message = encodeURIComponent("¡Hola Joaquín! Me interesa trabajar contigo en un proyecto web. ¿Podemos conversar?");
@@ -262,7 +263,6 @@ export default function ClientPortfolio() {
   };
   
   useEffect(() => {
-    setIsLoaded(true);
     const interval = setInterval(() => {
       setCurrentProject((prev) => (prev + 1) % PROJECTS.length);
     }, 4000);
